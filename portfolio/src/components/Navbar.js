@@ -1,24 +1,24 @@
 import React from 'react'
-function CustomLink({href,children, ...props}){
-	const path = window.location;
-	return(
-		<li className= {path === href ? 'active' : ''}>
-			<a href={href} {...props}>{children}</a>
-		</li>
-	)
-}
+import { SideBarData } from './SideBarData'
+import { Link } from 'react-router-dom'
 
 function Navbar() {
-	  return (
-		<nav className='nav'>
-			<a href='/' className='site-title'>Jon Crosse</a>
-			<ul className='nav-list'>
-				<CustomLink href='#about'>About</CustomLink>
-				<CustomLink href='#work'>Work</CustomLink>
-				<CustomLink href='#contact'>Contact</CustomLink>
-			</ul>
-		</nav>
-	  )
+	return (
+		<div>
+			<nav className='nav-menu'>
+				<ul className='nav-menu-items'>
+					{SideBarData.map((item, index) => {
+						return (
+							<li key={index} className={item.cName}>
+								<Link to={item.path}>
+									<span>{item.title}</span>
+								</Link>
+							</li>
+						)
+					})}
+				</ul>
+			</nav>
+		</div>
+	)
 }
-
 export default Navbar
